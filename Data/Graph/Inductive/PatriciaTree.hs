@@ -104,8 +104,9 @@ instance Graph Gr where
                       . map (second (\l -> (IM.empty,l,IM.empty)))
                       $ vs
 
-    labNodes (Gr g) = [ (node, label)
-                            | (node, (_, label, _)) <- IM.toList g ]
+    labNodes (Gr g) = fmap (\(x,(y,t,q))->(x,t)) $ IM.toList g
+      --[ (node, label)
+      --                      | (node, (_, label, _)) <- IM.toList g ]
 
     noNodes   (Gr g) = IM.size g
 
